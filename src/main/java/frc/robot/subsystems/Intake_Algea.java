@@ -9,7 +9,7 @@ public class Intake_Algea extends SubsystemBase {
   private double m_targetSpeed = 0.0;
 
   public Intake_Algea() {
-    motor = new SparkMax(23, MotorType.kBrushed);
+    motor = new SparkMax(21, MotorType.kBrushed);
   }
 
   @Override

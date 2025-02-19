@@ -1,25 +1,16 @@
 {
   "drive": {
     "type": "sparkmax_neo",
-<<<<<<< HEAD
     "id": 5,
-=======
-    "id": 1,
->>>>>>> 03d6ba398712d84bc492cca6630286bcd767ef73
     "canbus": null
   },
   "angle": {
     "type": "sparkmax_neo",
-<<<<<<< HEAD
     "id": 7,
-=======
-    "id": 2,
->>>>>>> 03d6ba398712d84bc492cca6630286bcd767ef73
     "canbus": null
   },
   "encoder": {
     "type": "cancoder",
-<<<<<<< HEAD
     "id": 0,
     "canbus": "rio"
   },
@@ -28,16 +19,6 @@
     "angle": true
   },
   "absoluteEncoderOffset": 23.994,
-=======
-    "id": 10,
-    "canbus": "rio"
-  },
-  "inverted": {
-    "drive": true,
-    "angle": true
-  },
-  "absoluteEncoderOffset": 23.4,
->>>>>>> 03d6ba398712d84bc492cca6630286bcd767ef73
   "location": {
     "front": 11,
     "left": 11
