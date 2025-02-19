@@ -111,7 +111,7 @@ public class RobotContainer {
             Commands.runOnce(() -> drivebase.resetOdometry(new Pose2d(3, 3, new Rotation2d()))));
     driverXbox
         .rightBumper()
-        .onTrue(Commands.runOnce(() -> arm.setTargetSpeed(0.2)))
+        .onTrue(Commands.runOnce(() -> arm.setTargetSpeed(-0.5)))
         .onFalse(Commands.runOnce(() -> arm.setTargetSpeed(0.0)));
 
     audreyXbox.a();
