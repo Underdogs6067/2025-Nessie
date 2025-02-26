@@ -1,17 +1,15 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.CANcoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Arm extends SubsystemBase {
-  CANcoder encoder;
+public class Elevator extends SubsystemBase {
   SparkMax motor;
   private double m_targetSpeed = 0.0;
 
-  public Arm() {
-    motor = new SparkMax(22, MotorType.kBrushed);
+  public Elevator() {
+    motor = new SparkMax(24, MotorType.kBrushed);
   }
 
   public void periodic() {

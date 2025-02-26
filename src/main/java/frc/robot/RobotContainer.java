@@ -14,7 +14,11 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Ball_arm;
+import frc.robot.subsystems.Coral_arm;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake_Algea;
+import frc.robot.subsystems.Intake_Coral;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
@@ -33,7 +37,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve/neo"));
-  private final Arm arm = new Arm();
+  private final Ball_arm Ball_arm = new Ball_arm();
+  private final Coral_arm Coral_arm = new Coral_arm();
+  private final Intake_Algea Intake_Algea = new Intake_Algea();
+  private final Intake_Coral intake_Coral = new Intake_Coral();
+  private final Elevator Elevator = new Elevator();
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular
    * velocity.
@@ -111,17 +119,54 @@ public class RobotContainer {
             Commands.runOnce(() -> drivebase.resetOdometry(new Pose2d(3, 3, new Rotation2d()))));
     driverXbox
         .rightBumper()
-        .onTrue(Commands.runOnce(() -> arm.setTargetSpeed(-0.5)))
-        .onFalse(Commands.runOnce(() -> arm.setTargetSpeed(0.0)));
+        .onTrue(Commands.runOnce(() -> Elevator.setTargetSpeed(0.7)))
+        .onFalse(Commands.runOnce(() -> Elevator.setTargetSpeed(0.0)));
 
-    audreyXbox.a();
-    audreyXbox.b();
-    audreyXbox.x();
-    audreyXbox.y();
-    audreyXbox.leftBumper();
-    audreyXbox.rightBumper();
-    audreyXbox.leftTrigger(0.5);
-    audreyXbox.rightTrigger(0.5);
+    driverXbox
+        .leftBumper()
+        .onTrue(Commands.runOnce(() -> Elevator.setTargetSpeed(-0.7)))
+        .onFalse(Commands.runOnce(() -> Elevator.setTargetSpeed(0.0)));
+
+    // Send the coral slowly
+    driverXbox
+        .b()
+        .onTrue(Commands.runOnce(() -> intake_Coral.setTargetSpeed(-0.3)))
+        .onFalse(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.0)));
+
+    audreyXbox
+        .rightBumper()
+        .onTrue(Commands.runOnce(() -> Ball_arm.setTargetSpeed(-0.8)))
+        .onFalse(Commands.runOnce(() -> Ball_arm.setTargetSpeed(0.0)));
+    audreyXbox
+        .rightTrigger()
+        .onTrue(Commands.runOnce(() -> Ball_arm.setTargetSpeed(0.8)))
+        .onFalse(Commands.runOnce(() -> Ball_arm.setTargetSpeed(0.0)));
+    audreyXbox
+        .leftBumper()
+        .onTrue(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.5)))
+        .onFalse(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.0)));
+    audreyXbox
+        .leftTrigger()
+        .onTrue(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(-0.5)))
+        .onFalse(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.0)));
+    audreyXbox
+        .x()
+        .onTrue(Commands.runOnce(() -> intake_Coral.setTargetSpeed(-0.5)))
+        .onFalse(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.0)));
+
+    audreyXbox
+        .y()
+        .onTrue(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.5)))
+        .onFalse(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.0)));
+
+    audreyXbox
+        .a()
+        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.25)))
+        .onFalse(Commands.runOnce(() -> Coral_arm.stop()));
+    audreyXbox
+        .b()
+        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.0)))
+        .onFalse(Commands.runOnce(() -> Coral_arm.stop()));
   }
 
   /**
