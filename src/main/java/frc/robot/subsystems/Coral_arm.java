@@ -32,6 +32,7 @@ public class Coral_arm extends SubsystemBase {
     CANcoderConfiguration config = new CANcoderConfiguration();
     config.MagnetSensor.MagnetOffset = 0.368652;
     config.MagnetSensor.SensorDirection = SensorDirectionValue.Clockwise_Positive;
+    config.MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.75;
     encoder.getConfigurator().apply(config);
     pid = new ProfiledPIDController(180, 0, 0, new Constraints(0.1, 2.5));
     BaseStatusSignal.setUpdateFrequencyForAll(50, angleValue);

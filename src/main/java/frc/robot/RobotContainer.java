@@ -143,11 +143,11 @@ public class RobotContainer {
         .onFalse(Commands.runOnce(() -> Ball_arm.setTargetSpeed(0.0)));
     audreyXbox
         .leftBumper()
-        .onTrue(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.5)))
+        .onTrue(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.9)))
         .onFalse(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.0)));
     audreyXbox
         .leftTrigger()
-        .onTrue(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(-0.5)))
+        .onTrue(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(-0.9)))
         .onFalse(Commands.runOnce(() -> Intake_Algea.setTargetSpeed(0.0)));
     audreyXbox
         .x()
@@ -156,16 +156,23 @@ public class RobotContainer {
 
     audreyXbox
         .y()
-        .onTrue(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.5)))
+        .onTrue(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.8)))
         .onFalse(Commands.runOnce(() -> intake_Coral.setTargetSpeed(0.0)));
-
     audreyXbox
         .a()
-        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.25)))
+        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(-0.07)))
+        .onFalse(Commands.runOnce(() -> Coral_arm.stop()));
+    audreyXbox
+        .start()
+        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.0)))
+        .onFalse(Commands.runOnce(() -> Coral_arm.stop()));
+    audreyXbox
+        .povUp()
+        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.54)))
         .onFalse(Commands.runOnce(() -> Coral_arm.stop()));
     audreyXbox
         .b()
-        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.0)))
+        .whileTrue(Commands.run(() -> Coral_arm.setTargetPosition(0.4)))
         .onFalse(Commands.runOnce(() -> Coral_arm.stop()));
   }
 
